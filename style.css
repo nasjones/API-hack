@@ -1,6 +1,7 @@
 body {
     background-color: blueviolet;
     text-align: center;
+    font-family: 'Poppins', sans-serif;
 }
 
 #query {
@@ -9,6 +10,10 @@ body {
     height: 3rem;
     width: 60%;
     font-size: x-large;
+}
+
+h1, h2, h3 {
+    font-family: 'PT Serif', serif;
 }
 
 h2 {
@@ -36,17 +41,22 @@ h2 {
     background-color: #4095c6;
 }
 
-ul {
+.recipeList {
     list-style-type: none;
     padding-inline-start: 0px;
     text-align: left;
 }
 
 .output-box {
-    display: none;
+    visibility: hidden;
     padding: 10px;
     background-color: white;
     opacity: 45%;
     border-radius: 10px;
     margin-top: 10px;
+    left: 150%;
+}
+
+.moreInfo {
+    display: none;
 }

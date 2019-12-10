@@ -1,6 +1,6 @@
-var map;
-var service;
-var infowindow;
+let map;
+let service;
+let infowindow;
 
 function initialize() {
     let search = $('#query').val();
@@ -9,14 +9,14 @@ function initialize() {
 }
 
 function placesLoad(search) {
-    var location = new google.maps.LatLng($.get('https://ipapi.co/latitude/'), $.get('https://ipapi.co/longitude/'));
+    let location = new google.maps.LatLng($.get('https://ipapi.co/latitude/'), $.get('https://ipapi.co/longitude/'));
 
     map = new google.maps.Map(document.getElementById('map'), {
         center: location,
         zoom: 15
     });
 
-    var request = {
+    let request = {
         location: location,
         radius: '500',
         query: search
@@ -29,8 +29,8 @@ function placesLoad(search) {
 function callback(results, status) {
     $('#restaurants').empty();
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        for (var i = 0; i < results.length, i < 10; i++) {
-            var place = results[i];
+        for (let i = 0; i < results.length, i < 10; i++) {
+            let place = results[i];
             $('#restaurants').append(`<li>${place.name}<br>${place.formatted_address}<br></li><hr>`)
         }
     }
@@ -57,9 +57,16 @@ function recipesLoad(search) {
 
 function recipePrinter(results) {
     $('#recipes').empty();
-    for (var i = 0; i < results.hits.length, i < 10; i++) {
-        var recipe = results.hits[i].recipe;
-        $('#recipes').append(`<li>${recipe.label}<br><a href="${recipe.url}" target="_blank">Recipe Link!<a/></li><hr>`)
+    for (let i = 0; i < results.hits.length, i < 10; i++) {
+        let recipe = results.hits[i].recipe;
+        let identify = 'option' + i;
+        $('#recipes').append(`<label><li class="recipeList">${recipe.label}<ul class="moreInfo" id="${identify}"></label>`);
+        let ingredients = recipe.ingredientLines;
+        for (let j = 0; j < ingredients.length; j++) {
+            $(`#${identify}`).append(`<li>${ingredients[j]}</li>`);
+        }
+        $(`#${identify}`).append(`<br><a href="${recipe.url}" target="_blank">Recipe Link!</a>`);
+        $('#recipes').append(`<hr>`);
     }
 }
 
@@ -67,7 +74,10 @@ function submit() {
     $('form').submit(e => {
         e.preventDefault();
         initialize();
-        $('.output-box').css('display', 'inherit')
+        $('.output-box').css('visibility', 'visible');
+        $('.output-box').animate({
+            left: '0%'
+        }, 500);
     });
 }
 
