@@ -31,7 +31,7 @@ function callback(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length, i < 10; i++) {
             let place = results[i];
-            $('#restaurants').append(`<li>${place.name}<br>${place.formatted_address}<br></li><hr>`)
+            $('#restaurants').append(`<li class="placeList">${place.name}<br>${place.formatted_address}<br></li><hr>`)
         }
     }
 }
@@ -60,13 +60,18 @@ function recipePrinter(results) {
     for (let i = 0; i < results.hits.length, i < 10; i++) {
         let recipe = results.hits[i].recipe;
         let identify = 'option' + i;
-        $('#recipes').append(`<label><li class="recipeList">${recipe.label}<ul class="moreInfo" id="${identify}"></label>`);
+        $('#recipes').append(`<li class="recipeList"><h3>${recipe.label}</h3><label><input type="radio" name="display">
+        </input><img src="downward-arrow.png" alt="arrow" class="arrow"></label><ul class="moreInfo" id="${identify}">`);
         let ingredients = recipe.ingredientLines;
         for (let j = 0; j < ingredients.length; j++) {
             $(`#${identify}`).append(`<li>${ingredients[j]}</li>`);
         }
-        $(`#${identify}`).append(`<br><a href="${recipe.url}" target="_blank">Recipe Link!</a>`);
-        $('#recipes').append(`<hr>`);
+        $(`#${identify}`).append(`<li><a href="${recipe.url}">Link!</a></li>`);
+
+
+        $('#recipes').append(`</ul><hr>`);
+        // $('#recipes').append(`<br><iframe src="${recipe.url}" ">Recipe Link!</iframe><hr>`);
+
     }
 }
 

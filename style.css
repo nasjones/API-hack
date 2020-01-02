@@ -41,9 +41,17 @@ h2 {
     background-color: #4095c6;
 }
 
-.recipeList {
+ul {
     list-style-type: none;
     padding-inline-start: 0px;
+}
+
+.recipeList, .output-box {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+
+.recipeList {
     text-align: left;
 }
 
@@ -59,4 +67,21 @@ h2 {
 
 .moreInfo {
     display: none;
+}
+
+.arrow {
+    width: 30px;
+}
+
+input[type="radio"] {
+    visibility: hidden;
+}
+
+@media screen and (min-width:500px) {
+    #wrapper {
+        display: flex;
+    }
+    .output-box {
+        margin: 30px;
+    }
 }
