@@ -28,10 +28,11 @@ function placesLoad(search) {
 
 function callback(results, status) {
     $('#restaurants').empty();
+    console.log(results);
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length, i < 10; i++) {
             let place = results[i];
-            $('#restaurants').append(`<li class="placeList">${place.name}<br>${place.formatted_address}<br></li><hr>`)
+            $('#restaurants').append(`<li class="placeList"><h3>${place.name}</h3><p class="address">${place.formatted_address}</p></li><hr>`)
         }
     }
 }
@@ -75,10 +76,18 @@ function recipePrinter(results) {
     }
 }
 
+function recipeDisplay() {
+
+}
+
 function submit() {
+    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?dinner')";
     $('form').submit(e => {
         e.preventDefault();
         initialize();
+        $('#query').animate({
+            top: '=10%'
+        }, 400);
         $('.output-box').css('visibility', 'visible');
         $('.output-box').animate({
             left: '0%'
