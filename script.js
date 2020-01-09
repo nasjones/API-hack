@@ -1,6 +1,7 @@
 let map;
 let service;
 let infowindow;
+let run;
 
 function initialize() {
     let search = $('#query').val();
@@ -61,7 +62,7 @@ function recipePrinter(results) {
     for (let i = 0; i < results.hits.length, i < 10; i++) {
         let recipe = results.hits[i].recipe;
         let identify = 'option' + i;
-        $('#recipes').append(`<li class="recipeList"><h3>${recipe.label}</h3><label><input type="radio" name="display">
+        $('#recipes').append(`<li class="recipeList"><h3>${recipe.label}</h3><label class="arrow-display"><input type="radio" name="display">
         </input><img src="downward-arrow.png" alt="arrow" class="arrow"></label><ul class="moreInfo" id="${identify}">`);
         let ingredients = recipe.ingredientLines;
         for (let j = 0; j < ingredients.length; j++) {
@@ -77,10 +78,16 @@ function recipePrinter(results) {
 }
 
 function recipeDisplay() {
+    $("input[name=display]").on('change', e => {
+        // e.find('input[name=display]:checked').toggle(400);
+        console.log(e.parent().val())
+        e.parent().siblings("ul").toggle();
 
+    });
 }
 
 function submit() {
+    run = false;
     document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?dinner')";
     $('form').submit(e => {
         e.preventDefault();
@@ -88,7 +95,14 @@ function submit() {
         $('#query').animate({
             top: '=10%'
         }, 400);
-        $('.ouput-box').toggle("slow");
+        if (!run) {
+            $('.output-box').toggle(1000);
+            run = true;
+        }
+        else {
+            $('.output-box').toggle(500);
+            $('.output-box').toggle(500);
+        }
         // $('.output-box').css('visibility', 'visible');
         // $('.output-box').animate({
         //     left: '0%'
@@ -97,3 +111,4 @@ function submit() {
 }
 
 $(submit)
+$(recipeDisplay)

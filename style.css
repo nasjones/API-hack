@@ -99,7 +99,7 @@ ul {
 }
 
 .output-box {
-    visibility: hidden;
+    display: none;
     padding: 10px;
     background-color: white;
     opacity: 85%;
@@ -108,12 +108,12 @@ ul {
     /* left: 150%; */
 }
 
-#restaurants {
+/* #restaurants {
     display: flex;
     flex-direction: column;
     margin: 0;
     flex: 1;
-}
+} */
 
 #recipes {
     display: flex;
@@ -130,12 +130,19 @@ ul {
     width: 30px;
 }
 
+.arrow-display {
+    cursor: pointer;
+}
+
 input[type="radio"] {
-    display: none;
+    /* display: none; */
+    top: 0;
 }
 
 @media screen and (min-width:500px) {
-    body {}
+    body {
+        border: 0ch;
+    }
     #wrapper {
         display: flex;
     }
