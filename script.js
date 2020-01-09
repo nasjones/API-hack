@@ -88,10 +88,11 @@ function submit() {
         $('#query').animate({
             top: '=10%'
         }, 400);
-        $('.output-box').css('visibility', 'visible');
-        $('.output-box').animate({
-            left: '0%'
-        }, 500);
+        $('.ouput-box').toggle("slow");
+        // $('.output-box').css('visibility', 'visible');
+        // $('.output-box').animate({
+        //     left: '0%'
+        // }, 500);
     });
 }
 
