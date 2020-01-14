@@ -1,12 +1,22 @@
 let map;
 let service;
 let infowindow;
-let run;
+let run = false;
 
 function initialize() {
     let search = $('#query').val();
     placesLoad(search);
     recipesLoad(search);
+    if (!run) {
+        $('#loading').toggle()
+        setTimeout(function () { $('#loading').toggle() }, 2000);
+        setTimeout(outDisplay, 2300);
+    }
+    else {
+        outDisplay();
+    }
+
+
 }
 
 function placesLoad(search) {
@@ -28,13 +38,17 @@ function placesLoad(search) {
 }
 
 function callback(results, status) {
+
     $('#restaurants').empty();
-    console.log(results);
+    // console.log(results);
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length, i < 10; i++) {
             let place = results[i];
             $('#restaurants').append(`<li class="placeList"><h3>${place.name}</h3><p class="address">${place.formatted_address}</p></li><hr>`)
         }
+    }
+    else {
+        alert("Sorry there was a problem with your search try a different search or try again later!");
     }
 }
 
@@ -55,6 +69,7 @@ function recipesLoad(search) {
             console.log(e.message);
         }
     });
+
 }
 
 function recipePrinter(results) {
@@ -62,8 +77,8 @@ function recipePrinter(results) {
     for (let i = 0; i < results.hits.length, i < 10; i++) {
         let recipe = results.hits[i].recipe;
         let identify = 'option' + i;
-        $('#recipes').append(`<li class="recipeList"><h3>${recipe.label}</h3><label class="arrow-display"><input type="radio" name="display">
-        </input><img src="downward-arrow.png" alt="arrow" class="arrow"></label><ul class="moreInfo" id="${identify}">`);
+        $('#recipes').append(`<li class="recipeList"><h3>${recipe.label}</h3>
+        <img src="downward-arrow.png" alt="arrow" class="arrow" onClick="recipeDisplay()"><ul class="moreInfo" id="${identify}">`);
         let ingredients = recipe.ingredientLines;
         for (let j = 0; j < ingredients.length; j++) {
             $(`#${identify}`).append(`<li>${ingredients[j]}</li>`);
@@ -78,37 +93,63 @@ function recipePrinter(results) {
 }
 
 function recipeDisplay() {
-    $("input[name=display]").on('change', e => {
-        // e.find('input[name=display]:checked').toggle(400);
-        console.log(e.parent().val())
-        e.parent().siblings("ul").toggle();
+    console.log("clicked");
+    $(this).closest('.moreInfo').toggle();
+}
 
-    });
+function isNullOrWhiteSpace(input) {
+    // console.log("." + input + ".");
+    return input === null || input.trim().length > 0;
+}
+
+function outDisplay() {
+    if (!run) {
+        $('.output-box').toggle(500);
+        run = true;
+    }
+    else {
+        $('.output-box').toggle(500);
+        $('.output-box').toggle(500);
+    }
 }
 
 function submit() {
-    run = false;
     document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?dinner')";
+
     $('form').submit(e => {
         e.preventDefault();
-        initialize();
-        $('#query').animate({
-            top: '=10%'
-        }, 400);
-        if (!run) {
-            $('.output-box').toggle(1000);
-            run = true;
+        // console.log($('#query').val());
+        if (!isNullOrWhiteSpace($('#query').val())) {
+            alert("Please input some text!");
         }
         else {
-            $('.output-box').toggle(500);
-            $('.output-box').toggle(500);
+
+            initialize();
+            // $('#query').animate({
+            //     top: '=10%'
+            // }, 400);
+            // // wait(function showBox() {
+            // if (!run) {
+            //     outDisplay();
+            //     run = true;
+            // }
+            // else {
+            //     outDisplay();
+            //     outDisplay();
+            // }
+            // }, 3000);
+            // $('.output-box').css('visibility', 'visible');
+            // $('.output-box').animate({
+            //     left: '0%'
+            // }, 500);
         }
-        // $('.output-box').css('visibility', 'visible');
-        // $('.output-box').animate({
-        //     left: '0%'
-        // }, 500);
+    });
+    $('.arrow').click(function () {
+        console.log("clicked");
+        $(this).closest('.moreInfo').toggle();
     });
 }
 
+
+
 $(submit)
-$(recipeDisplay)
