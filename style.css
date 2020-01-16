@@ -7,7 +7,12 @@ body {
     background-size: cover;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    height: inherit;
+    /* height: inherit; */
+    background-image: url('https://source.unsplash.com/1600x900/?dinner');
+}
+
+.flip {
+    transform: rotate(-180deg);
 }
 
 #query {
@@ -16,6 +21,10 @@ body {
     height: 3rem;
     width: 60%;
     font-size: x-large;
+}
+
+#wrapper {
+    display: block;
 }
 
 hr {
@@ -78,10 +87,10 @@ h2 {
     flex: 1;
 } */
 
-#recipe-box>#recipes {
+/* #recipe-box>#recipes {
     display: flex;
     flex: 1;
-}
+} */
 
 .recipeList, .output-box {
     list-style-type: none;
@@ -101,6 +110,7 @@ h2 {
     background-color: white;
     opacity: 85%;
     border-radius: 10px;
+    margin: 15px;
     /* margin-top: 10px; */
     /* left: 150%; */
 }
@@ -153,7 +163,26 @@ input[type="radio"] {
     top: 0;
 }
 
-@media screen and (min-width:500px) {
+/* #restaurant-box {
+    height: fit-content;
+    width: 35%;
+} */
+
+#recipes>li {
+    flex-grow: 1;
+}
+
+@media screen and (min-width:600px) {
+    #restaurant-box {
+        height: fit-content;
+        width: 35%;
+    }
+    #recipe-box {
+        display: flex;
+        width: 35%;
+        justify-content: space-evenly;
+        flex-direction: column;
+    }
     body {
         border: 0ch;
     }

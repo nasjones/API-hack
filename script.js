@@ -7,16 +7,7 @@ function initialize() {
     let search = $('#query').val();
     placesLoad(search);
     recipesLoad(search);
-    if (!run) {
-        $('#loading').toggle()
-        setTimeout(function () { $('#loading').toggle() }, 2000);
-        setTimeout(outDisplay, 2300);
-    }
-    else {
-        outDisplay();
-    }
-
-
+    outDisplay();
 }
 
 function placesLoad(search) {
@@ -38,13 +29,12 @@ function placesLoad(search) {
 }
 
 function callback(results, status) {
-
-    $('#restaurants').empty();
-    // console.log(results);
+    let restaurants = $('#restaurants');
+    restaurants.empty();
     if (status == google.maps.places.PlacesServiceStatus.OK) {
         for (let i = 0; i < results.length, i < 10; i++) {
             let place = results[i];
-            $('#restaurants').append(`<li class="placeList"><h3>${place.name}</h3><p class="address">${place.formatted_address}</p></li><hr>`)
+            restaurants.append(`<li class="placeList"><h3>${place.name}</h3><p class="address">${place.formatted_address}</p></li><hr>`);
         }
     }
     else {
@@ -66,6 +56,7 @@ function recipesLoad(search) {
             recipePrinter(results);
         },
         error: function (e) {
+            alert
             console.log(e.message);
         }
     });
@@ -73,52 +64,66 @@ function recipesLoad(search) {
 }
 
 function recipePrinter(results) {
-    $('#recipes').empty();
+    let recipes = $('#recipes');
+    recipes.empty();
     for (let i = 0; i < results.hits.length, i < 10; i++) {
-        let recipe = results.hits[i].recipe;
+        let option = results.hits[i].recipe;
         let identify = 'option' + i;
-        $('#recipes').append(`<li class="recipeList"><h3>${recipe.label}</h3>
-        <img src="downward-arrow.png" alt="arrow" class="arrow" onClick="recipeDisplay()"><ul class="moreInfo" id="${identify}">`);
-        let ingredients = recipe.ingredientLines;
+        recipes.append(`<li class="recipeList"><h3>${option.label}</h3>
+        <img src="downward-arrow.png" alt="arrow" class="arrow" role="button" onClick="recipeDisplay(this.id)" id="recipe-${i}"><ul class="moreInfo" id="${identify}">`);
+        let ingredients = option.ingredientLines;
         for (let j = 0; j < ingredients.length; j++) {
             $(`#${identify}`).append(`<li>${ingredients[j]}</li>`);
         }
-        $(`#${identify}`).append(`<li><a href="${recipe.url}">Link!</a></li>`);
+        $(`#${identify}`).append(`<li><a href="${option.url}">Link!</a></li>`);
 
-
-        $('#recipes').append(`</ul><hr>`);
+        recipes.append(`</ul><hr>`);
         // $('#recipes').append(`<br><iframe src="${recipe.url}" ">Recipe Link!</iframe><hr>`);
 
     }
 }
 
-function recipeDisplay() {
+function recipeDisplay(finder) {
     console.log("clicked");
-    $(this).closest('.moreInfo').toggle();
+    console.log(finder);
+    let display = $(`#${finder}`);
+    // document.querySelector("#recipes > li:nth-child(3) > img")
+    // let display = $("#recipes > li:nth-child(1) > img");
+    display.toggleClass('flip');
+
+    display.siblings('.moreInfo').toggle(500);
+
 }
+// $(this)
 
 function isNullOrWhiteSpace(input) {
-    // console.log("." + input + ".");
     return input === null || input.trim().length > 0;
 }
 
 function outDisplay() {
     if (!run) {
-        $('.output-box').toggle(500);
+        $('#loading').toggle()
+        setTimeout(function () { $('#loading').toggle() }, 2000);
+        setTimeout(function () { $('.output-box').toggle(500) }, 2300);
         run = true;
     }
     else {
         $('.output-box').toggle(500);
-        $('.output-box').toggle(500);
+        $('#loading').toggle()
+        setTimeout(function () { $('#loading').toggle() }, 2000);
+        setTimeout(function () { $('.output-box').toggle(500) }, 2300);
     }
 }
 
 function submit() {
-    document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?dinner')";
+    if ($(window).width() > 600) {
+        $('#recipe-box').toggle();
+    }
+
+    // document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?dinner')";
 
     $('form').submit(e => {
         e.preventDefault();
-        // console.log($('#query').val());
         if (!isNullOrWhiteSpace($('#query').val())) {
             alert("Please input some text!");
         }
@@ -143,10 +148,6 @@ function submit() {
             //     left: '0%'
             // }, 500);
         }
-    });
-    $('.arrow').click(function () {
-        console.log("clicked");
-        $(this).closest('.moreInfo').toggle();
     });
 }
 
