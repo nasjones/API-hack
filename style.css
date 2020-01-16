@@ -16,15 +16,21 @@ body {
 }
 
 #query {
-    border-radius: 5px;
+    border-radius: 10px;
     opacity: 85%;
     height: 3rem;
     width: 60%;
     font-size: x-large;
+    padding: 5px;
 }
 
 #wrapper {
     display: block;
+}
+
+.moreButton {
+    opacity: 100%;
+    border: none;
 }
 
 hr {
@@ -61,7 +67,7 @@ h2 {
     transition: all 0.2s;
 }
 
-#submit:hover {
+#submit:hover, #submit:focus {
     background-color: #4095c6;
 }
 

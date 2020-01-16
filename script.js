@@ -70,7 +70,7 @@ function recipePrinter(results) {
         let option = results.hits[i].recipe;
         let identify = 'option' + i;
         recipes.append(`<li class="recipeList"><h3>${option.label}</h3>
-        <img src="downward-arrow.png" alt="arrow" class="arrow" role="button" onClick="recipeDisplay(this.id)" id="recipe-${i}"><ul class="moreInfo" id="${identify}">`);
+        <button class="moreButton" onClick="recipeDisplay(this.id)" id="recipe-${i}"><img src="downward-arrow.png" alt="arrow" class="arrow" role="button" ></button><ul class="moreInfo" id="${identify}">`);
         let ingredients = option.ingredientLines;
         for (let j = 0; j < ingredients.length; j++) {
             $(`#${identify}`).append(`<li>${ingredients[j]}</li>`);
