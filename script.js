@@ -56,7 +56,7 @@ function recipesLoad(search) {
             recipePrinter(results);
         },
         error: function (e) {
-            alert
+            alert("Sorry there was an error finding recipes for you.");
             console.log(e.message);
         }
     });
@@ -78,8 +78,6 @@ function recipePrinter(results) {
         $(`#${identify}`).append(`<li><a href="${option.url}">Link!</a></li>`);
 
         recipes.append(`</ul><hr>`);
-        // $('#recipes').append(`<br><iframe src="${recipe.url}" ">Recipe Link!</iframe><hr>`);
-
     }
 }
 
@@ -87,14 +85,11 @@ function recipeDisplay(finder) {
     console.log("clicked");
     console.log(finder);
     let display = $(`#${finder}`);
-    // document.querySelector("#recipes > li:nth-child(3) > img")
-    // let display = $("#recipes > li:nth-child(1) > img");
     display.toggleClass('flip');
 
     display.siblings('.moreInfo').toggle(500);
 
 }
-// $(this)
 
 function isNullOrWhiteSpace(input) {
     return input === null || input.trim().length > 0;
@@ -116,11 +111,10 @@ function outDisplay() {
 }
 
 function submit() {
+    $('#query').focus();
     if ($(window).width() > 600) {
         $('#recipe-box').toggle();
     }
-
-    // document.body.style.backgroundImage = "url('https://source.unsplash.com/1600x900/?dinner')";
 
     $('form').submit(e => {
         e.preventDefault();
@@ -128,29 +122,9 @@ function submit() {
             alert("Please input some text!");
         }
         else {
-
             initialize();
-            // $('#query').animate({
-            //     top: '=10%'
-            // }, 400);
-            // // wait(function showBox() {
-            // if (!run) {
-            //     outDisplay();
-            //     run = true;
-            // }
-            // else {
-            //     outDisplay();
-            //     outDisplay();
-            // }
-            // }, 3000);
-            // $('.output-box').css('visibility', 'visible');
-            // $('.output-box').animate({
-            //     left: '0%'
-            // }, 500);
         }
     });
 }
-
-
 
 $(submit)

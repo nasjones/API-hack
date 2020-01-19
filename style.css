@@ -7,7 +7,6 @@ body {
     background-size: cover;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    /* height: inherit; */
     background-image: url('https://source.unsplash.com/1600x900/?dinner');
 }
 
@@ -54,21 +53,16 @@ h2 {
 #submit {
     display: inline-block;
     padding: 0.3em 1.2em;
-    /* margin-top: 20px; */
-    /* margin: 0 0.3em 0.3em 0; */
     border-radius: 2em;
-    /* box-sizing: border-box; */
-    /* text-decoration: none; */
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
     color: #FFFFFF;
-    background-color: #4eb5f1;
-    /* text-align: center; */
+    background-color: #812d34;
     transition: all 0.2s;
 }
 
 #submit:hover, #submit:focus {
-    background-color: #4095c6;
+    background-color: #812d34;
 }
 
 #recipes, #restaurants {
@@ -80,33 +74,12 @@ h2 {
     flex: 1;
 }
 
-/* #recipe-box {
-    display: flex;
-} */
-
-/* #restaurant-box {
-    display: flex;
-    flex-direction: column;
-} */
-
-/* #restaurant-box>#restaurants {
-    flex: 1;
-} */
-
-/* #recipe-box>#recipes {
-    display: flex;
-    flex: 1;
-} */
-
 .recipeList, .output-box {
     list-style-type: none;
-    /* padding-inline-start: 0px; */
 }
 
 .recipeList {
     text-align: left;
-    /* display: flex; */
-    /* flex-direction: column; */
     flex: 1;
 }
 
@@ -117,28 +90,19 @@ h2 {
     opacity: 85%;
     border-radius: 10px;
     margin: 15px;
-    /* margin-top: 10px; */
-    /* left: 150%; */
 }
 
 #title {
     margin-top: 15px;
-    color: #4eb5f1;
+    color: #812d34;
     background-color: #FFFFFF;
     margin-left: auto;
     margin-right: auto;
     padding: 10px;
     width: fit-content;
     border-radius: 4px;
-    /* opacity: 80% */
+    font-size: 3em;
 }
-
-/* #restaurants {
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    flex: 1;
-} */
 
 #recipes {
     display: flex;
@@ -165,14 +129,8 @@ h2 {
 }
 
 input[type="radio"] {
-    /* display: none; */
     top: 0;
 }
-
-/* #restaurant-box {
-    height: fit-content;
-    width: 35%;
-} */
 
 #recipes>li {
     flex-grow: 1;
