@@ -14,7 +14,6 @@ function initialize() {
 }
 
 function placesLoad(search) {
-
     map = new google.maps.Map(document.getElementById("map"), {
         center: coordinates,
         zoom: 15
@@ -22,7 +21,7 @@ function placesLoad(search) {
 
     let request = {
         location: coordinates,
-        radius: "500",
+        radius: "800",
         query: search
     };
 
@@ -48,7 +47,7 @@ function callback(results, status) {
         }
     }
     else {
-        alert("Sorry there was a problem finding restaurants try a different search or try again later!");
+        alert("Sorry there was a problem finding restaurants near you. Try a different search or try again later!");
     }
 }
 
@@ -66,11 +65,10 @@ function recipesLoad(search) {
             recipePrinter(results);
         },
         error: function (e) {
-            alert("Sorry there was an error finding recipes for you.");
+            alert("Sorry there was an error finding recipes for you. Try a different search or try again later.");
             console.log(e.message);
         }
     });
-
 }
 
 function recipePrinter(results) {
@@ -106,7 +104,12 @@ function outDisplay() {
     let load = $("#loading");
     let output = $(".output-box");
     if (!run) {
-        load.toggle();
+        $("#info-panel").toggle(200);
+
+        setTimeout(function () {
+            load.toggle();
+        }, 500);
+
         setTimeout(function () {
             load.toggle();
         }, 2000);

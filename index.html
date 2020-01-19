@@ -17,11 +17,19 @@
         <h1 id="title">Crudhub</h1>
     </header>
     <main id="content">
+        <div id="info-panel">
+            <p>Welcome to Crudhub! Not sure whether you want to stay in and cook or go out to eat here's the tool for
+                you! Just type in the search bar below what you're craving! <br>
+                e.g. "pizza", "tacos", "Sri Lankan food", "Portuguese food", etc.<br>
+                i.e. Use the arrows under the recipes to display the ingredients needed.
+            </p>
+        </div>
         <form id="query-form">
-            <input type="text" id="query" title="Query input" placeholder="What are you in the mood for?">
+            <input type="text" id="query" title="Query-input" placeholder="What are you in the mood for?">
 
             <button id="submit" type="submit">Submit</button>
         </form>
+
         <img src="loading.gif" id="loading" alt="loading-gif">
         <div id="wrapper">
             <div id="restaurant-box" class="output-box">
@@ -35,17 +43,9 @@
                 </ul>
             </div>
         </div>
+
     </main>
     <div id="map"></div>
-    <!-- <footer id="contact-info">
-        <h4>Contact Me:</h4>
-        <a href="mailto:nassircjones@gmail.com"><img class="contact-img" src="email-favicon.png"
-                alt="email-favicon"></a>
-        <a href="https://www.linkedin.com/in/nassir-jones-0351b4174/" target="_blank"><img class="contact-img"
-                src="black-linkedin-fav.png" alt="black-linkedin-favicon"></a>
-        <a href="https://github.com/nasjones" target="_blank"><img class="contact-img" src="github-favicon.jpg"
-                alt="github-favicon"></a>
-    </footer> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCft8GSMpmlSEFXGDBDkJbM1BW3c25AYDE&libraries=places"></script>
