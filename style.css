@@ -8,6 +8,7 @@ body {
     text-align: center;
     font-family: 'Poppins', sans-serif;
     background-image: url('https://source.unsplash.com/1600x900/?dinner');
+    /* height: inherit; */
 }
 
 .flip {
@@ -134,6 +135,24 @@ input[type="radio"] {
 
 #recipes>li {
     flex-grow: 1;
+}
+
+.place-info {
+    font-style: italic;
+}
+
+#contact-info {
+    /* padding-bottom: 10px; */
+    background-color: #c196ae;
+    /* height: inherit; */
+    /* top: auto; */
+    margin-top: 50%;
+}
+
+.contact-img {
+    height: 30px;
+    width: 30px;
+    margin: 20px;
 }
 
 @media screen and (min-width:600px) {

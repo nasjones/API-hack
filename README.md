@@ -2,4 +2,4 @@
 
 Name: Crudhub
 
-link: https://nasjones.github.io/api-hack/
+link: https://nasjones.github.io/crudhub/
