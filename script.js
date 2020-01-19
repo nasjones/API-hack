@@ -147,15 +147,15 @@ function getCoordinates() {
 }
 
 function submit() {
-    $("#query").focus();
+    if ($(window).width() > 600) {
+        $("#query").focus();
+        $("#recipe-box").toggle();
+    }
+
     getCoordinates();
     setTimeout(function () {
         coordinates = new google.maps.LatLng(lat, lon)
     }, 2000);
-
-    if ($(window).width() > 600) {
-        $("#recipe-box").toggle();
-    }
 
     $("form").submit(e => {
         e.preventDefault();
