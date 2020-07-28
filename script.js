@@ -5,6 +5,8 @@ let run = false;
 let lat;
 let lon;
 let coordinates;
+let placeLoaded;
+let restaurantLoaded;
 
 function initialize() {
     let search = $("#query").val();
@@ -14,6 +16,7 @@ function initialize() {
 }
 
 function placesLoad(search) {
+    placeLoaded = false;
     map = new google.maps.Map(document.getElementById("map"), {
         center: coordinates,
         zoom: 15
@@ -33,25 +36,36 @@ function callback(results, status) {
     let restaurants = $("#restaurants");
     restaurants.empty();
     if (status == google.maps.places.PlacesServiceStatus.OK) {
+
         for (let i = 0; i < results.length, i < 10; i++) {
             let place = results[i];
 
-            restaurants.append(`<li class="placeList" id="${place.name}"><h3>${place.name}</h3><p class="place-info" id="restaurant-info-${i}">
-            Rating: ${place.rating}  currently `);
+            restaurants.append(`<li class="placeList" id="${place.name}">
+            <h3>${place.name}</h3>
+            <p class="place-info" id="restaurant-info-${i}">
+            Rating: ${place.rating}  currently </p>`);
             $(`#restaurant-info-${i}`);
-            if (place.opening_hours.open_now == true)
-                $(`#restaurant-info-${i}`).append("Open");
+
+            if (place.business_status == 'OPERATIONAL') {
+                if (place.opening_hours.open_now == true)
+                    $(`#restaurant-info-${i}`).append("Open");
+                else
+                    $(`#restaurant-info-${i}`).append("Closed");
+            }
             else
-                $(`#restaurant-info-${i}`).append("Closed");
+                $(`#restaurant-info-${i}`).append("not operational");
             restaurants.append(`<p class="address">${place.formatted_address}</p></li><hr>`);
         }
+
     }
     else {
         alert("Sorry there was a problem finding restaurants near you. Try a different search or try again later!");
     }
+    placeLoaded = true;
 }
 
 function recipesLoad(search) {
+    restaurantLoaded = false;
     $.ajax({
         "async": true,
         "crossDomain": true,
@@ -72,6 +86,7 @@ function recipesLoad(search) {
 }
 
 function recipePrinter(results) {
+    restaurantLoaded = true;
     let recipes = $("#recipes");
     recipes.empty();
     for (let i = 0; i < results.hits.length, i < 10; i++) {
